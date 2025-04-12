@@ -9,10 +9,17 @@
 // In a longer project I like to put these in a separate file
 /* exported setup, draw */
 
+let layerOffsets = []; // Array to store offsets for each mountain layer
+let numLayers = 4;
+
+
+
 let seed = 239;
 let sceneBuffer;
 let sceneWidth;
 let offsetX = 0;  // Initialize offsetX
+
+
 
 function setup() {
   // Create the canvas with specific dimensions
@@ -20,6 +27,9 @@ function setup() {
   let canvas = createCanvas(container.offsetWidth, container.offsetHeight);
   canvas.parent('canvas-container');
   
+  for (let i = 0; i < numLayers; i++) {
+    layerOffsets[i] = 0; // Start with no offset
+  }
   // Set up the "Reimagine" button functionality
   let reimagineButton = createButton("Reimagine");
   reimagineButton.mousePressed(() => {
@@ -34,19 +44,24 @@ function setup() {
     document.documentElement.requestFullscreen();
   });
 
+   // Watch for fullscreen changes
+   document.addEventListener('fullscreenchange', () => {
+    if (!fullscreen()) {
+      // User exited fullscreen (likely pressed Escape)
+      // Reset canvas size, reposition, or update UI
+      console.log('Exited fullscreen');
+      const container = document.getElementById('canvas-container');
+      resizeCanvas(container.offsetWidth, container.offsetHeight);
+    }
+  });
+
   // Set up scene width and buffer for graphics
   sceneWidth = width * 7;  // Scene is 7x the canvas width
   sceneBuffer = createGraphics(sceneWidth, height);
   renderScene();  // Initial scene rendering
 }
 
-function windowResized() {
-  let container = document.getElementById('canvas-container');
-  resizeCanvas(container.offsetWidth, container.offsetHeight);
-  sceneWidth = width * 7;
-  sceneBuffer = createGraphics(sceneWidth, height);
-  renderScene();  // re-render with new dimensions
-}
+
 
 function renderScene() {
   sceneBuffer.background(255);
@@ -124,7 +139,6 @@ function drawSun(pg) {
 }
 
 function drawMountainRange(pg) {
-  let numLayers = 4;
   let baseY = height * 0.7;
 
   for (let i = 0; i < numLayers; i++) {
@@ -136,13 +150,22 @@ function drawMountainRange(pg) {
     let layerHeight = map(i, 0, numLayers, 50, 160);
     let yOffset = baseY + i * 50;
     let freq = map(i, 0, numLayers - 1, 0.01, 0.05);
-    let stepCount = map(i, 0, numLayers - 1, 100, 30);
+    let stepCount = map(i, 0, numLayers - 1, 200, 60);
     let jitter = map(i, 0, numLayers - 1, 0, 6);
     let points = [];
+
+    // Increase the disparity between the speeds
+    let layerSpeed = map(i, 0, numLayers - 1, 0.15, 0.02); // Increased speed range
+
+    // Move the x-offset for each layer based on its speed
+    layerOffsets[i] -= layerSpeed; // Move left, change direction as necessary
 
     pg.beginShape();
     for (let j = 0; j <= stepCount; j++) {
       let x = map(j, 0, stepCount, 0, pg.width);
+      // Apply parallax by adding the layer's offset
+      x += layerOffsets[i];
+
       let y = yOffset - noise(x * freq + i * 100 + seed) * layerHeight;
       y += random(-jitter, jitter);
       pg.vertex(x, y);
@@ -152,7 +175,7 @@ function drawMountainRange(pg) {
     pg.vertex(0, height);
     pg.endShape(CLOSE);
 
-    // MIST
+    // MIST (same as before, no change needed)
     if (i < numLayers - 1) {
       let mistLevels = 10;
       for (let m = 0; m < mistLevels; m++) {
