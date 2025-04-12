@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<!-- This title is used for tabs and bookmarks -->
-	<title>Experiment X - Subject/Topic</title>
+	<!-- Page title for tabs and bookmarks -->
+	<title>Experiment 2 - Living Impressions</title>
 
-	<!-- Use UTF character set, a good idea with any webpage -->
+	<!-- Use UTF character set -->
 	<meta charset="UTF-8" />
-	<!-- Set viewport so page remains consistently scaled w narrow devices -->
+
+	<!-- Set viewport to scale on narrow devices -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-	<!-- Include CSS file, including a site-wide CSS and for this particular page -->
+	<!-- Include CSS files -->
 	<link rel="stylesheet" type="text/css" href="../css/site.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 
@@ -17,54 +18,95 @@
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
         crossorigin="anonymous"></script>
+
 	<!-- Load p5.js library -->
 	<script src="https://cdn.jsdelivr.net/npm/p5@1.9.2/lib/p5.js"></script>
 
-	<!-- Link to javascript files - DEFER waits until all elements are rendered -->
-    <script type="text/javascript" src="../js/site.js" DEFER></script>
-	<!-- Use me for a JavaScript OOP Project -->
-	<script type="text/javascript" src="./js/project.js" DEFER></script>
-	<!-- Use me for a p5.js project -->
-	<script type="text/javascript" src="./js/sketch.js" DEFER></script>
+	<!-- Link to JavaScript files with DEFER attribute to load after rendering -->
+    <script type="text/javascript" src="../js/site.js" defer></script>
+	<script type="text/javascript" src="./js/project.js" defer></script>
+	<script type="text/javascript" src="./js/sketch.js" defer></script>
 </head>
 <body>
-	<!-- Style this page by changing the CSS in ../css/site.css or css/experiment.css -->
 	<main id="content">
 		<section>
 
-			<h1>Experiment X - Subject/Topic</h1>
+			<!-- Experiment Title -->
+			<h1>Experiment 2 - Living Impressions</h1>
 
+			<!-- Canvas Section -->
 			<div class="minor-section">
-				<div id="canvas-container">
-					<!-- canvas will be added here -->
+				<button id="fullscreen">Fullscreen</button>
+					<div class="canvas-container">
+						<!-- <button id="reimagine">Reimagine</button>-->
+					</div>
+				<div id="canvas-container" class="glitch-output">
+					<!-- Canvas will be added here dynamically -->
+					<!-- Fullscreen button for the canvas -->
+					
 				</div>
-                <div class="fullscreen-box">
-                    <button id="fullscreen">Fullscreen</button>
-                </div>
 			</div>
 
+			<!-- Description Section -->
 			<div class="minor-section">
 				<h2>Description</h2>
-				<p>What are you trying to acomplish with this experiment?</p>
+				<p>This generator creates a scrollable mountain scape with the early sunrise over steep and jagged cliffs, shading them in the early dawn mist.</p>
 			</div>
 
+			<!-- Technical Section -->
 			<div class="minor-section">
 				<h2>Technical</h2>
-				<p>Describe in detail what you did technically and how it works?</p>
+				<p>The scene is built using layers of noise, each part of the screen representing a strip of jagged rectangles, similar to torn paper. The closer the mountains are, the more jagged and darker they appear, creating a sense of depth and distance.</p>
 			</div>
 
+			<!-- Reflection Section -->
 			<div class="minor-section">
 				<h2>Reflection</h2>
-				<p>Each person that worked on the code should reflect on the process, the difficulties, and the successes of the experiment.</p>
+				<p>I worked on the code alone and faced several challenges in achieving both the main and stretch goals. I wanted to create parallax scrolling for the mountains and a more detailed sun, but due to time constraints, I had to focus on getting the core functionality working first.</p>
 			</div>
 
 		</section>
+
+		<!-- Navigation Links Section -->
 		<nav id="links" class="minor-section">
-			<!-- Put link back to homepage here. -->
-            <ul>
-                <li><a href="../index.html">Home</a></li>
-            </ul>
+			<ul>
+				<li><a href="../index.html">Home</a></li>
+			</ul>
 		</nav>
 	</main>
+
+	<!-- Fullscreen Functionality Script -->
+	<script>
+		// Fullscreen toggle functionality for the canvas
+		document.getElementById("fullscreen").addEventListener("click", function () {
+			var canvas = document.getElementById("myCanvas");
+			if (canvas.requestFullscreen) {
+				canvas.requestFullscreen();
+			} else if (canvas.mozRequestFullScreen) { // Firefox
+				canvas.mozRequestFullScreen();
+			} else if (canvas.webkitRequestFullscreen) { // Chrome, Safari, Opera
+				canvas.webkitRequestFullscreen();
+			} else if (canvas.msRequestFullscreen) { // IE/Edge
+				canvas.msRequestFullscreen();
+			}
+		});
+
+		// p5.js setup function to create canvas and call the scene rendering function
+		function setup() {
+			// Create canvas dynamically inside the canvas-container div
+			let canvas = createCanvas(windowWidth, windowHeight);
+			canvas.parent('canvas-container');  // Attach canvas to the container
+			reseedScene();  // Call your scene rendering function
+		}
+
+		// Example scene generation function
+		function reseedScene() {
+			background(50, 50, 50);  // Set the background to a dark color
+			fill(255, 204, 0);
+			noStroke();
+			ellipse(width / 2, height / 2, 150, 150);  // Draw a simple shape (e.g., sun)
+		}
+	</script>
+
 </body>
 </html>
