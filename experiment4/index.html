@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Experiment 3 - Alternate Worlds</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" type="text/css" href="../css/site.css" />
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+
+  <!-- Libraries -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.9.2/lib/p5.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.2/addons/p5.dom.min.js"></script>
+
+  <!-- Scripts -->
+  <script type="text/javascript" src="../js/site.js" defer></script>
+  <script type="text/javascript" src="./js/xxhash.min.js" defer></script>
+  <script type="text/javascript" src="./js/sketch.js" defer></script>
+  <script type="text/javascript" src="./js/project.js" defer></script>
+  
+ 
+</head>
+<body>
+  <main id="content">
+    <section>
+      <h1>Experiment 4 - Infinite Worlds</h1>
+
+      <!-- Canvas Section -->
+      
+		<!-- First Row -->
+		<div class="minor-section box-group">
+      <div class="box-row">
+        <button onclick="switchSketch('sketch')">Checkerboard</button>
+        <button onclick="switchSketch('sketch2')">Maze</button>
+      </div>
+      <div class="box-row">
+        <div id="canvas-container"></div>
+      </div>
+    </div>
+    
+	  
+
+      <!-- Description Section -->
+      <div class="minor-section">
+        <h2>Description</h2>
+        <p>
+          This Generator uses a tilesheet to randomly render miniature landscapes, mapping the different kinds of tiles with an ascii table, which can be edited and interacted with in real time. 
+        </p>
+      </div>
+
+      <!-- Technical Section -->
+      <div class="minor-section">
+        <h2>Technical</h2>
+        <p>
+          These landscapes are created through several algorithms, first generating a grid from a seed, and then drawing, placing tiles from the asset sheet into the keyed areas on the grid.
+        </p>
+      </div>
+
+      <!-- Reflection Section -->
+      <div class="minor-section">
+        <h2>Reflection</h2>
+        <p>
+          This assignment was fun, like the others, but by far the most frustrating. I grappled with the website code for hours, days, and to no real evail. I wasted so much time just trying to get basic things to work. Im upset that I wasnt able to finish the entirety of the assingment, but realistically I cant afford anymore time, or mental capacity on this project. The real disapointing part is that I am sure I could have done the dungeon, if I had ever gotten time to try it. Unfortunetly, I was so busy trying to get the website to make two canvas windows for which the dungeon and overworld to sit in, that I just didnt have enough time to test and refine my algorithms for dungeon.
+        </p>
+      </div>
+    </section>
+
+    <!-- Navigation -->
+    <nav id="links" class="minor-section">
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+      </ul>
+    </nav>
+  </main>
+</body>
+</html>

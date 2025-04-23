@@ -1,0 +1,180 @@
+/* style.css */
+
+/* Set the canvas element to be the full size of the container */
+canvas {
+    width: 100%;
+    height: 100%;
+  }
+  
+  /* Center the canvas element on the page */
+  body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* instead of flex-start */
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #1e1e2f;
+    color: #f0f0f0;
+    font-family: 'Georgia', serif;
+}
+
+  
+  /* Main content container */
+  main#content {
+    width: 90%;
+    max-width: 900px;
+    padding: 2rem;
+    background-color: #2c2c3e;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    margin-top: 2rem;
+  }
+  
+  /* Capitalized titles and headers */
+  .glitch-wrapper {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    color: #ffcc66;
+  }
+  
+  /* Container for generated output and button */
+  .glitch-output {
+    font-family: 'Georgia', serif;
+    font-weight: normal;
+    border: thin solid #666;
+    padding: 1em;
+    margin: 0em auto;
+    width: 700px;
+    background-color: #2a2a3d;
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.4);
+    border-radius: 8px;
+  }
+
+  /* Generated box styling */
+  #box {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: #1e1e2f;
+    border: 1px solid #ffcc66;
+    border-radius: 8px;
+    min-height: 100px;
+    color: #e0e0f0;
+    font-family: monospace;
+    white-space: pre-wrap;        /* Respect \n line breaks */
+    word-wrap: break-word;        /* Wrap long words if necessary */
+  }
+  
+  /* Button styling */
+  #clicker {
+    padding: 0.5rem 1rem;
+    background-color: #ffcc66;
+    color: #1e1e2f;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  #clicker:hover {
+    background-color: #ffb347;
+  }
+  
+  /* Section container */
+  .minor-section {
+    background-color: #383850;
+    border-left: 4px solid #ffcc66;
+    padding: 1rem;
+    margin: 1.5rem 0;
+    border-radius: 8px;
+  }
+  
+  /* Headings */
+  h1, h2 {
+    color: #ffcc66;
+    font-family: 'Courier New', Courier, monospace;
+  }
+  
+  /* Navigation links */
+  nav#links ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  
+  nav#links li a {
+    color: #66ccff;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  nav#links li a:hover {
+    text-decoration: underline;
+  }
+
+/* Canvas container */
+
+  
+  /* Box for fullscreen + reimagine buttons */
+  .fullscreen-box {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  /* Shared button styling */
+  .fullscreen-box button {
+    padding: 0.5rem 1rem;
+    background-color: #ffcc66;
+    color: #1e1e2f;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .fullscreen-box button:hover {
+    background-color: #ffb347;
+  }
+
+  .box-group {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .box-row {
+    display: flex;
+    flex-direction: row;
+    gap: 36px;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+textarea#asciiBox1,
+textarea#asciiBox2 {
+  width: 48%;
+  height: 380px;
+  opacity: 0.5;
+  letter-spacing: 1ex;
+  font-family: monospace;
+  resize: none;
+  background-color: #2a2a3d;
+  color: #e0e0f0;
+  border: 1px solid #ffcc66;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+#canvas-container,
+#canvas-container1 {
+  width:100%;
+  height: 400px;
+}
