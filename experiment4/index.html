@@ -32,15 +32,14 @@
       <!-- Canvas Section -->
       
 		<!-- First Row -->
-		<div class="minor-section box-group">
-      <div class="box-row">
-        <button onclick="switchSketch('sketch')">Checkerboard</button>
-        <button onclick="switchSketch('sketch2')">Maze</button>
-      </div>
-      <div class="box-row">
-        <div id="canvas-container"></div>
-      </div>
-    </div>
+    <div class="minor-section box-group">
+			<!-- First Row -->
+			<div class="box-row">
+        <div id="container"></div>
+			  
+			</div>
+      <div id="canvas-container"></div>
+		</div>
     
 	  
 
@@ -48,7 +47,7 @@
       <div class="minor-section">
         <h2>Description</h2>
         <p>
-          This Generator uses a tilesheet to randomly render miniature landscapes, mapping the different kinds of tiles with an ascii table, which can be edited and interacted with in real time. 
+          This is an infinite variable miniverse generator. Each dot is supposed to represent a small solar system, the arrow orbiting it the user's space ship. Dashed lines connect the ship's orbit to other near by stars that are in range for the ship to jump to. 
         </p>
       </div>
 
@@ -56,7 +55,7 @@
       <div class="minor-section">
         <h2>Technical</h2>
         <p>
-          These landscapes are created through several algorithms, first generating a grid from a seed, and then drawing, placing tiles from the asset sheet into the keyed areas on the grid.
+          These are made through the repeated use of several main functions, mainly a repetitive draw function, a drawTile function, drawShip, and drawDashedLines (for the hyperlink lines). These functions draw and create the universe, animate the ships orbit, and draw the lines that connect 'in-range' star systems.
         </p>
       </div>
 
@@ -64,7 +63,7 @@
       <div class="minor-section">
         <h2>Reflection</h2>
         <p>
-          This assignment was fun, like the others, but by far the most frustrating. I grappled with the website code for hours, days, and to no real evail. I wasted so much time just trying to get basic things to work. Im upset that I wasnt able to finish the entirety of the assingment, but realistically I cant afford anymore time, or mental capacity on this project. The real disapointing part is that I am sure I could have done the dungeon, if I had ever gotten time to try it. Unfortunetly, I was so busy trying to get the website to make two canvas windows for which the dungeon and overworld to sit in, that I just didnt have enough time to test and refine my algorithms for dungeon.
+          This assignment was supposed to be interesting. I wanted to do so, SO much more with this, but time constaints hit me like a freight train and I was only able to get this tiny bit to work. Its still a little buggy, if you notice, the hyperlink lanes sometimes disapear before making it to the star, thats because theyre sometimes being drawn 'underneath' the black tiles of the space. I dont know yet how to fix this. 
         </p>
       </div>
     </section>
