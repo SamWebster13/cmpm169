@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Experiment 5 - Evolutionary Impressions</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" type="text/css" href="../css/site.css" />
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+
+  <!-- Libraries -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.9.2/lib/p5.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.2/addons/p5.dom.min.js"></script>
+
+  <!-- Scripts -->
+  <script type="text/javascript" src="../js/site.js" defer></script>
+  <script type="text/javascript" src="./js/sketch.js" defer></script>
+  <script type="text/javascript" src="./js/project.js" defer></script>
+  
+ 
+</head>
+<body>
+  <main id="content">
+    <section>
+      <h1>Experiment 5 - Evolutionary Impressions</h1>
+
+     <!-- Canvas Section -->
+    <div class="minor-section box-group">
+        <select id="dropper"></select>
+        <button id="restart">
+          restart
+        </button>
+        <div class="box-row">
+          <p id="active"></p>
+          <p>
+            Mutation rate (<span id="rate"></span>%):<br /><input
+              id="slider"
+              type="range"
+              min="1"
+              max="100"
+              value="100"
+            />
+          </p>
+          <p id="best"></p>
+        </div>
+        
+        <div class="box-row">
+          <p>Active score: <span id="activeScore"></span></p>
+          <p>Exploration rate: <span id="fpsCounter"></span> fps</p>
+          <p>Best score: <span id="bestScore"></span></p>
+        </div>
+        
+      
+        <p id="memory" data-max-items="16"></p>
+    </div>
+    
+	  
+
+      <!-- Description Section -->
+      <div class="minor-section">
+        <h2>Description</h2>
+        <p>
+          This is an infinite variable miniverse generator. Each dot is supposed to represent a small solar system, the arrow orbiting it the user's space ship. Dashed lines connect the ship's orbit to other near by stars that are in range for the ship to jump to. 
+        </p>
+      </div>
+
+      <!-- Technical Section -->
+      <div class="minor-section">
+        <h2>Technical</h2>
+        <p>
+          These are made through the repeated use of several main functions, mainly a repetitive draw function, a drawTile function, drawShip, and drawDashedLines (for the hyperlink lines). These functions draw and create the universe, animate the ships orbit, and draw the lines that connect 'in-range' star systems.
+        </p>
+      </div>
+
+      <!-- Reflection Section -->
+      <div class="minor-section">
+        <h2>Reflection</h2>
+        <p>
+          This assignment was supposed to be interesting. I wanted to do so, SO much more with this, but time constaints hit me like a freight train and I was only able to get this tiny bit to work. Its still a little buggy, if you notice, the hyperlink lanes sometimes disapear before making it to the star, thats because theyre sometimes being drawn 'underneath' the black tiles of the space. I dont know yet how to fix this. 
+        </p>
+      </div>
+    </section>
+
+    <!-- Navigation -->
+    <nav id="links" class="minor-section">
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+      </ul>
+    </nav>
+  </main>
+</body>
+</html>
