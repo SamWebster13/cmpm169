@@ -64,7 +64,7 @@
       <div class="minor-section">
         <h2>Description</h2>
         <p>
-          This is an infinite variable miniverse generator. Each dot is supposed to represent a small solar system, the arrow orbiting it the user's space ship. Dashed lines connect the ship's orbit to other near by stars that are in range for the ship to jump to. 
+          This is a image generator, thats trying to replicate the images in the drop down. It randomly creates and draws a set number of images, using color sampling to match up colors, and aranges them to better remake the image.
         </p>
       </div>
 
@@ -72,7 +72,7 @@
       <div class="minor-section">
         <h2>Technical</h2>
         <p>
-          These are made through the repeated use of several main functions, mainly a repetitive draw function, a drawTile function, drawShip, and drawDashedLines (for the hyperlink lines). These functions draw and create the universe, animate the ships orbit, and draw the lines that connect 'in-range' star systems.
+          Essentially the generator runs mutations on the shapes and colors, and is given a score based on how close it is to the original image. It remembers this score and what it generated to get there, so the algorithm learns and goes from there, slowly getting closer to the original as it continues to mutate
         </p>
       </div>
 
@@ -80,7 +80,7 @@
       <div class="minor-section">
         <h2>Reflection</h2>
         <p>
-          This assignment was supposed to be interesting. I wanted to do so, SO much more with this, but time constaints hit me like a freight train and I was only able to get this tiny bit to work. Its still a little buggy, if you notice, the hyperlink lanes sometimes disapear before making it to the star, thats because theyre sometimes being drawn 'underneath' the black tiles of the space. I dont know yet how to fix this. 
+          This assignment wasnt too hard, it ended up being pretty simple. However I did have some stretch goals id like to touch on this week, maybe making more sliders to add personalization to the generation process. 
         </p>
       </div>
     </section>
