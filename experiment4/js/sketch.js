@@ -42,6 +42,7 @@ let [tw, th] = [p2_tileWidth(), p2_tileHeight()];
 let orbitRadius = 20; // radius of the orbit around the star
 let orbitSpeed = 0.02; // controls how fast the spaceship orbits
 let angle = 0; // initial angle for the spaceship
+let pendingDashedLines = [];
 
 function p2_worldKeyChanged(key) {
   worldSeed = XXH.h32(key, 0);
@@ -83,8 +84,35 @@ function updateCamera() {
   // Update camera_offset based on user input for panning (if needed)
   camera_offset.add(camera_velocity);
 }
-
  
+function isMouseNearLine(x1, y1, x2, y2, threshold) {
+  const A = mouseX - x1;
+  const B = mouseY - y1;
+  const C = x2 - x1;
+  const D = y2 - y1;
+
+  const dot = A * C + B * D;
+  const len_sq = C * C + D * D;
+  let param = -1;
+  if (len_sq !== 0) param = dot / len_sq;
+
+  let xx, yy;
+  if (param < 0) {
+    xx = x1;
+    yy = y1;
+  } else if (param > 1) {
+    xx = x2;
+    yy = y2;
+  } else {
+    xx = x1 + param * C;
+    yy = y1 + param * D;
+  }
+
+  const dx = mouseX - xx;
+  const dy = mouseY - yy;
+  return Math.sqrt(dx * dx + dy * dy) < threshold;
+}
+
 function p2_tileWidth() {
   return 48;
 }
@@ -126,12 +154,11 @@ function p2_drawTile(i, j) {
 
   if (ego.i == i && ego.j == j) {
     // Orbiting the star
+    // Compute angle only once
     angle += orbitSpeed;
-
-    // Calculate the new position of the spaceship
     let shipX = orbitRadius * Math.cos(angle);
     let shipY = orbitRadius * Math.sin(angle);
-    
+
     // Draw orbit circle
     noFill();
     stroke(255);
@@ -139,43 +166,70 @@ function p2_drawTile(i, j) {
     ellipse(0, 0, orbitRadius * 2, orbitRadius * 2);
     noStroke();
 
-    // Now draw the spaceship at the new position
-    drawShip(shipX, shipY);
+    // Draw ship
+    
 
-    // Before the loop, set up a counter for the legal moves
     let legalMoveCount = 0;
+    let extensionFactor = 2;
 
-    // Draw legal move markers and lines
-    // Loop over tiles in a 7x7 square centered around the player (from -3 to +3)
+    // Delay drawing dashed lines until after background and stars
+    let dashedLines = [];
+
     for (let ii = ego.i - 3; ii <= ego.i + 3; ii++) {
       for (let jj = ego.j - 3; jj <= ego.j + 3; jj++) {
-        if (isLegalMove(ii, jj)) {
+        if (isLegalMove(ii, jj) && !(ii === ego.i && jj === ego.j)) {
+          legalMoveCount++;
+
           let dx = (ii - ego.i);
           let dy = (jj - ego.j);
-          
-          // Snap dx, dy to only 8-way directions
           let dirX = Math.sign(dx);
           let dirY = Math.sign(dy);
-  
+
           let screenX = -(dirX - dirY) * (tw / 2);
           let screenY = (dirX + dirY) * (th / 2);
-  
-          // Inside your legal move drawing code
-          let extensionFactor = 2;
+
+          // Extend to make line longer
           let extendedX = screenX * extensionFactor;
           let extendedY = screenY * extensionFactor;
-  
-          push();
-          stroke(255); // White lines will be above
-          drawDashedLine(0, 0, extendedX, extendedY, 5); // Draw dashed line
-          pop();
+
+        let angleToTarget = Math.atan2(extendedY, extendedX);
+        // Snap the angle to the nearest multiple of 15 degrees
+        let snappedAngle = Math.round(angleToTarget / (Math.PI / 18)) * (Math.PI / 18);
+        // Use snappedAngle for further calculations
+        let ringX = orbitRadius * Math.cos(snappedAngle);
+        let ringY = orbitRadius * Math.sin(snappedAngle);
+
+
+
+        dashedLines.push({ 
+          x1: ringX, 
+          y1: ringY, 
+          x2: extendedX, 
+          y2: extendedY,
+        });
         }
       }
     }
-    // After drawing everything, output the total number of legal moves
-    console.log("Legal moves this frame:", legalMoveCount);
+
+    // Now draw dashed lines after everything else
+    push();
+    stroke(255);
+    dashedLines.forEach(dash => {
+      const hover = isMouseNearLine(dash.x1, dash.y1, dash.x2, dash.y2, 6); // 6px hover range
+      if (hover) {
+        line(dash.x1, dash.y1, dash.x2, dash.y2); // Solid line when hovered
+      } else {
+        drawDashedLine(dash.x1, dash.y1, dash.x2, dash.y2, 5); // Dashed line otherwise
+      }
+    });
+
+    pop();
+
+    drawShip(shipX, shipY);
   }
 }
+
+
 
 function drawDashedLine(x1, y1, x2, y2, dashLength = 5) {
   // Calculate the total distance between the start and end points
@@ -184,9 +238,7 @@ function drawDashedLine(x1, y1, x2, y2, dashLength = 5) {
   // Calculate how many dashes fit into the distance
   let dashCount = distance / dashLength;
   
-  // Log the total distance and dash count for debugging
-  console.log(`Drawing dashed line from (${x1}, ${y1}) to (${x2}, ${y2})`);
-  console.log(`Total distance: ${distance}, Dash count: ${dashCount}`);
+  ellipse(x2, y2, orbitRadius * 2, orbitRadius * 2);
   
   // Loop to draw the dashes
   for (let i = 0; i < dashCount; i += 2) {
@@ -197,13 +249,11 @@ function drawDashedLine(x1, y1, x2, y2, dashLength = 5) {
     let endY = lerp(y1, y2, (i + 1) / dashCount);
     
     // Log the start and end positions for each dash
-    console.log(`Dash ${i}: Start -> (${startX}, ${startY}), End -> (${endX}, ${endY})`);
     
     // Draw the line segment (the dash)
     line(startX, startY, endX, endY);
   }
 }
-
 
 function drawShip(x, y) {
   push(); // Save current transform
@@ -227,9 +277,6 @@ function drawShip(x, y) {
   noStroke();
   pop(); // Restore previous transform
 }
-
-
-
 
 function isLegalMove(i, j) {
   if (!isOnBoard(i, j)) {
@@ -275,12 +322,40 @@ function applyMove(i, j) {
 }
 
 function p2_drawSelectedTile(i, j) {
-  // MOVEMENT: when hovering over a legal move, change ship altitude
   if (isLegalMove(i, j)) {
-    ego.altitude = 10;
+    stroke(144, 238, 144); // Light green color
+    strokeWeight(3); // Thicker solid line
+
+    // Calculate the player's current position and the hover position
+    let x1 = ego.j * tw;  // Current column of the player
+    let y1 = ego.i * th;  // Current row of the player
+    let x2 = j * tw;      // Hovered column
+    let y2 = i * th;      // Hovered row
+
+    // Extend to make the line longer if needed (similar to what we did for the dashed lines)
+    let extensionFactor = 2;
+    let dx = x2 - x1;
+    let dy = y2 - y1;
+
+    let screenX = dx;
+    let screenY = dy;
+
+    // Extend the line
+    let extendedX = screenX * extensionFactor;
+    let extendedY = screenY * extensionFactor;
+
+    // Snap the angle to the nearest multiple of 15 degrees
+    let angleToTarget = Math.atan2(extendedY, extendedX);
+    let snappedAngle = Math.round(angleToTarget / (Math.PI / 18)) * (Math.PI / 18);
+
+    // Calculate the final line position
+    let finalX2 = x1 + extendedX;
+    let finalY2 = y1 + extendedY;
+
+    // Draw the line between the two points
+    line(x1, y1, finalX2, finalY2);
   } else {
-    ego.altitude = 0;
+    
+    drawingContext.setLineDash([]); // Reset after use
   }
 }
-
-

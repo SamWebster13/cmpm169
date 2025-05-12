@@ -53,7 +53,7 @@ canvas {
 
   /* Generated box styling */
   #box {
-    margin-top: 1rem;
+    margin-top: 0.25rem;
     padding: 1rem;
     background-color: #1e1e2f;
     border: 1px solid #ffcc66;
@@ -86,7 +86,7 @@ canvas {
     background-color: #383850;
     border-left: 4px solid #ffcc66;
     padding: 1rem;
-    margin: 1.5rem 0;
+    margin: 0.25rem 0;
     border-radius: 8px;
   }
   
@@ -242,6 +242,129 @@ textarea#asciiBox2 {
   cursor: pointer;
 }
 
+#shapeCountSlider {
+  width: 100%;
+  appearance: none;
+  height: 8px;
+  border-radius: 5px;
+  background: #ffcc66;
+  outline: none;
+  transition: background 0.3s ease;
+  cursor: pointer;
+}
+
+#shapeCountSlider::-webkit-slider-thumb {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #1e1e2f;
+  border: 2px solid #ffcc66;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+#shapeCountSlider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #1e1e2f;
+  border: 2px solid #ffcc66;
+  cursor: pointer;
+}
+
+#triangleWeightSlider {
+  width: 100%;
+  appearance: none;
+  height: 8px;
+  border-radius: 5px;
+  background: #ffcc66;
+  outline: none;
+  transition: background 0.3s ease;
+  cursor: pointer;
+}
+
+#triangleWeightSlider::-webkit-slider-thumb {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #1e1e2f;
+  border: 2px solid #ffcc66;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+#triangleWeightSlider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #1e1e2f;
+  border: 2px solid #ffcc66;
+  cursor: pointer;
+}
+
+#ellipseWeightSlider {
+  width: 100%;
+  appearance: none;
+  height: 8px;
+  border-radius: 5px;
+  background: #ffcc66;
+  outline: none;
+  transition: background 0.3s ease;
+  cursor: pointer;
+}
+
+#ellipseWeightSlider::-webkit-slider-thumb {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #1e1e2f;
+  border: 2px solid #ffcc66;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+#ellipseWeightSlider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #1e1e2f;
+  border: 2px solid #ffcc66;
+  cursor: pointer;
+}
+
+#rectWeightSlider {
+  width: 100%;
+  appearance: none;
+  height: 8px;
+  border-radius: 5px;
+  background: #ffcc66;
+  outline: none;
+  transition: background 0.3s ease;
+  cursor: pointer;
+}
+
+#rectWeightSlider::-webkit-slider-thumb {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #1e1e2f;
+  border: 2px solid #ffcc66;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+#rectWeightSlider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #1e1e2f;
+  border: 2px solid #ffcc66;
+  cursor: pointer;
+}
 /* Tooltip values near sliders */
 #rate {
   color: #ffcc66;
@@ -264,3 +387,17 @@ textarea#asciiBox2 {
   color: #e0e0f0;
   white-space: pre-wrap;
 }
+
+/* Tighter spacing between slider controls and labels */
+.minor-section p {
+  margin: 0.25rem 0;
+  line-height: 1.3;
+}
+
+/* Ensure consistent slider spacing */
+.minor-section input[type="range"] {
+  margin-top: 0.25rem;
+  height: 1rem;
+}
+
+

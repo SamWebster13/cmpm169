@@ -110,7 +110,7 @@ function draw() {
   
   // Update camera position (centered on the player)
   updateCamera();
-  
+   
   // Convert mouse position to world coordinates based on the current camera offset
   let world_pos = screenToWorld(
     [0 - mouseX, mouseY],
@@ -147,12 +147,7 @@ function draw() {
   // Optional: Display info about the tile under the mouse cursor
   describeMouseTile(world_pos, [camera_offset.x, camera_offset.y]);
 
-  if (window.p2_drawAfter) {
-    window.p2_drawAfter();
-  }
 }
-
-
 
 // Display a discription of the tile at world_x, world_y.
 function describeMouseTile([world_x, world_y], [camera_x, camera_y]) {

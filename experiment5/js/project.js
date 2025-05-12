@@ -46,6 +46,28 @@ function setup() {
   loadPixels();
   currentInspirationPixels = pixels;
   frameRate(80);
+
+  //-----------------------------------------------------
+  shapeCountSlider = select('#shapeCountSlider');
+  triangleWeightSlider = select('#triangleWeightSlider');
+  ellipseWeightSlider = select('#ellipseWeightSlider');
+  rectWeightSlider = select('#rectWeightSlider');
+
+  // Optional: live update labels
+  shapeCountSlider.input(() => {
+    select('#shapeCountLabel').html(shapeCountSlider.value());
+  });
+  triangleWeightSlider.input(() => {
+    select('#triangleWeightLabel').html(triangleWeightSlider.value());
+  });
+  ellipseWeightSlider.input(() => {
+    select('#ellipseWeightLabel').html(ellipseWeightSlider.value());
+  });
+  rectWeightSlider.input(() => {
+    select('#rectWeightLabel').html(rectWeightSlider.value());
+  });
+
+
 }
 
 function evaluate() {

@@ -33,19 +33,40 @@ function sampleColor(img) {
 
 function initDesign(inspiration) {
   resizeCanvas(inspiration.image.width / 8, inspiration.image.height / 8);
-  
+
   let design = {
     bg: 128,
     fg: []
-  }
+  };
+
+  const triangleWeight = int(select('#triangleWeightSlider').value());
+  const ellipseWeight = int(select('#ellipseWeightSlider').value());
+  const rectWeight = int(select('#rectWeightSlider').value());
+
+  const shapePool = [];
+  for (let i = 0; i < triangleWeight; i++) shapePool.push('triangle');
+  for (let i = 0; i < ellipseWeight; i++) shapePool.push('ellipse');
+  for (let i = 0; i < rectWeight; i++) shapePool.push('rect');
+  if (shapePool.length === 0) shapePool.push('rect'); // fallback
+
   
-  for (let i = 0; i < 300; i++) {
+  const shapeCount = int(select('#shapeCountSlider').value());
+  const minCount   = int(select('#shapeCountSlider').elt.min);
+  const maxCount   = int(select('#shapeCountSlider').elt.max);
+
+  // fewer shapes = bigger (2.0 → 0.25)
+  const sizeFactor = map(shapeCount, minCount,maxCount , 2.0, 0.25);
+
+   for (let i = 0; i < shapeCount; i++) {
+    let w = random(width / 2 * sizeFactor);
+    let h = random(height / 2 * sizeFactor);
+
     design.fg.push({
-      shapeType: random(['rect', 'ellipse', 'triangle', 'line', 'arc', 'quad', 'star']),
+      shapeType: random(shapePool),
       x: random(width),
       y: random(height),
-      w: random(width / 2),
-      h: random(height / 2),
+      w: w,
+      h: h,
       rotation: random(TWO_PI),
       fill: sampleColor(inspiration.image)
     });

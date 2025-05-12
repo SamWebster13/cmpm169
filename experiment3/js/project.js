@@ -47,13 +47,11 @@ function reseed1() {
 
 function regenerateGrid1() {
   select("#asciiBox1").value(gridToString(generateGrid(numCols1, numRows1 + 5)));
-  select("#asciiBox2").value(gridToString(generateDungeon(numCols2, numRows2 + 5)));
   reparseGrid1();
 }
 
 function reparseGrid1() {
   currentGrid1 = stringToGrid(select("#asciiBox1").value());
-  currentGrid2 = stringToGrid(select("#asciiBox2").value());
 }
 
 // -------------------- SHARED --------------------
